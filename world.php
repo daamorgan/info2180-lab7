@@ -33,9 +33,20 @@ function displayResult($list){
     }else{
     ?>
     <h2><?="Results";?></h2>
-    <ul>
+    <table>
+      <tr>
+        <td><?= "Country Name";?></td>
+        <td><?= "Continent";?></td>
+        <td><?= "Independence Year";?></td>
+        <td><?= "Head of State";?></td>
+      </tr>
         <?php foreach ($list as $row):?>
-            <li><?= $row['name'] . ' is ruled by ' . $row['head_of_state']; ?></li>
+        <tr>
+          <td><?= $row["name"];?></td>
+          <td><?= $row["continent"];?></td>
+          <td><?= $row["independence_year"];?></td>
+          <td><?= $row["head_of_state"];?></td>
+        </tr>
         <?php endforeach; ?>
-    </ul><?php
+    </tablel><?php
 }};
