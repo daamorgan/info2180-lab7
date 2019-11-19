@@ -9,12 +9,18 @@ try{
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     if ($_SERVER['REQUEST_METHOD']==='GET'){
       if (!(empty($_GET["country"])) &&  isset($_GET["country"])) {
-        $country = filter_input(INPUT_GET, 'country', FILTER_SANITIZE_SPECIAL_CHARS);
+         $country = filter_input(INPUT_GET, 'country', FILTER_SANITIZE_SPECIAL_CHARS);
+        if ($_GET['context']==="country"){
         $result=getResult("SELECT * FROM countries WHERE name LIKE '%$country%';",$conn);
-        displayResult($result);
+        displayResultCountries($result);
+        }else{
+        $sql="SELECT c.name, c.district, c.population FROM cities c join countries cs on c.country_code = cs.code WHERE cs.name='$country'";
+        $result=getResult($sql,$conn);  //need to fix
+        displayResultCities($result);
+        }
       }
       elseif (empty($_GET["country"])){ 
-      displayResult(getResult("SELECT * FROM countries;",$conn));
+      displayResultCountries(getResult("SELECT * FROM countries;",$conn));
     }}
 }catch(PDOException $e) { 
     echo "Connection failed: " . $e->getMessage(); 
@@ -27,12 +33,11 @@ function getResult($querysql,$pdo){
 };
 
 
-function displayResult($list){
+function displayResultCountries($list){
     if (empty($list)){
         ?> <p><?= "0 results";?> </p> <?php
     }else{
     ?>
-    <h2><?="Results";?></h2>
     <table>
       <tr>
         <td><?= "Country Name";?></td>
@@ -50,3 +55,28 @@ function displayResult($list){
         <?php endforeach; ?>
     </tablel><?php
 }};
+
+function displayResultCities($list){
+  ?>
+    <table>
+      <tr>
+        <td><?= "City Name";?></td>
+        <td><?= "District";?></td>
+        <td><?= "Population";?></td>
+      </tr>
+        <?php foreach ($list as $row):?>
+        <tr>
+          <td><?= $row["name"];?></td>
+          <td><?= $row["district"];?></td>
+          <td><?= $row["population"];?></td>
+        </tr>
+        <?php endforeach; ?>
+    </tablel><?php
+};
+
+
+
+
+
+
+
