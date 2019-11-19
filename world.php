@@ -13,10 +13,9 @@ try{
         $result=getResult("SELECT * FROM countries WHERE name LIKE '%$country%';",$conn);
         displayResult($result);
       }
-      
-    }else{ 
+      elseif (empty($_GET["country"])){ 
       displayResult(getResult("SELECT * FROM countries;",$conn));
-    }
+    }}
 }catch(PDOException $e) { 
     echo "Connection failed: " . $e->getMessage(); 
 }
