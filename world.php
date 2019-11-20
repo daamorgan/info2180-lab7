@@ -57,6 +57,9 @@ function displayResultCountries($list){
 }};
 
 function displayResultCities($list){
+  if (empty($list)){
+        ?> <p><?= "0 results";?> </p> <?php
+    }else{
   ?>
     <table>
       <tr>
@@ -72,7 +75,7 @@ function displayResultCities($list){
         </tr>
         <?php endforeach; ?>
     </tablel><?php
-};
+}};
 
 
 
