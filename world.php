@@ -40,10 +40,10 @@ function displayResultCountries($list){
     ?>
     <table>
       <tr>
-        <td><?= "Country Name";?></td>
-        <td><?= "Continent";?></td>
-        <td><?= "Independence Year";?></td>
-        <td><?= "Head of State";?></td>
+        <th><?= "Country Name";?></th>
+        <th><?= "Continent";?></th>
+        <th><?= "Independence Year";?></th>
+        <th><?= "Head of State";?></th>
       </tr>
         <?php foreach ($list as $row):?>
         <tr>
@@ -60,9 +60,9 @@ function displayResultCities($list){
   ?>
     <table>
       <tr>
-        <td><?= "City Name";?></td>
-        <td><?= "District";?></td>
-        <td><?= "Population";?></td>
+        <th><?= "City Name";?></th>
+        <th><?= "District";?></th>
+        <th><?= "Population";?></th>
       </tr>
         <?php foreach ($list as $row):?>
         <tr>
